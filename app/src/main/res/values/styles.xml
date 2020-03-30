@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/backgroundColor</item>
+        <item name="textAppearanceHeadline1">@color/textAppColor</item>
+
+        <item name="buttonStyle">@style/ButtonTheme</item>
+        <item name="spinnerStyle">@style/SpinnerTheme</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerItemStyle</item>
+    </style>
+
+    <!-- Button theme. -->
+    <style name="ButtonTheme" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:colorButtonNormal" tools:targetApi="lollipop">@color/colorPrimary</item>
+        <item name="android:colorControlHighlight" tools:targetApi="lollipop">@color/colorAccent
+        </item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <!-- EditText theme. -->
+    <style name="EditTextTheme" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@color/editTextBackground</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <!-- Spinner theme. -->
+    <style name="SpinnerTheme" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/spinner_bg</item>
+    </style>
+
+    <style name="SpinnerItemStyle" parent="Widget.AppCompat.TextView.SpinnerItem">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+    </style>
+
+</resources>

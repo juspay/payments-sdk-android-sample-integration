@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0655CA</color>
+    <color name="colorPrimaryDark">#043b8d</color>
+    <color name="colorAccent">#043b8d</color>
+    <color name="backgroundColor">#E7E5E5</color>
+    <color name="textAppColor">#FFFFFF</color>
+
+    <color name="controlBackground">#F1F1F1</color>
+    <color name="controlBackgroundDark">#303F9F</color>
+
+    <color name="windowBackground">#E4E4E4</color>
+    <color name="editTextBackground">@color/controlBackground</color>
+    <color name="spinnerBackground">@color/controlBackground</color>
+    <color name="responseTextBg">#FF444444</color>
+</resources>

@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">Integration Assistant</string>
+    <string name="title_home">Home</string>
+    <string name="input">Input</string>
+    <string name="output">Output</string>
+    <string name="proceed">Proceed</string>
+    <string name="prefetchDesc">
+        Hit INPUT button to refer the input given 
+        \ni.e., params passed.
+        \nStep 1. Hit PREFETCH button.
+        \nStep 2. Hit PROCEED button.
+        \n\nRefer FAQ section for additional details.
+    </string>
+
+    <string name="initiateDesc">
+        Hit INPUT button to refer the input given and OUTPUT button to look into Signed input.
+        \nStep 1. Hit SIGN CUSTOMER DETAILS PAYLOAD button.
+        \nStep 2. Hit INITIATE button.
+        \nStep 3. Hit PROCEED button.
+        \n\nRefer FAQ section for additional details.
+    </string>
+
+    <string name="processDesc">
+         Step 1. Hit GENERATE ORDER ID button.
+        \nStep 2. Hit SIGN ORDER DETAILS PAYLOAD button.
+        \nStep 3. Hit PROCESS button.
+        \nHit INPUT button to check input passed and OUTPUT button to check signed input under SIGN ORDER DETAILS PAYLOAD.
+        \nHit INPUT button to check process input under PROCESS.
+        \n\nRefer FAQ section for additional details.
+    </string>
+
+    <string name="faq">FAQ</string>
+    <string name="copy">copy</string>
+
+    <string name="prefetch">Prefetch</string>
+    <string name="generate_order_id">Generate Order ID</string>
+    <string name="sign_order_details_payload">Sign Order Details Payload</string>
+    <string name="terminate">Terminate</string>
+    <string name="sign_customer_details_payload">Sign Customer Details Payload</string>
+    <string name="initiate">Initiate</string>
+
+    <string name="language">Language</string>
+    <string name="action">Action</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="customer_settings">Customer Settings</string>
+    <string name="customer_email">Customer Email</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="customer_mobile">Customer Mobile</string>
+    <string name="client_id">Client ID</string>
+    <string name="merchant_id">Merchant ID</string>
+    <string name="merchant_key_id">Merchant Key ID</string>
+    <string name="service">Service</string>
+    <string name="signature_url">Signature URL</string>
+    <string name="sandbox">Sandbox</string>
+    <string name="production">Production</string>
+    <string name="amount">Amount</string>
+    <string name="merchant_side_configurations">Merchant-Side Configurations</string>
+    <string name="beta_assets">Beta Assets</string>
+    <string name="mandate_options">Mandate Options</string>
+    <string name="mandate_max_amount">Mandate Max Amount</string>
+
+</resources>
