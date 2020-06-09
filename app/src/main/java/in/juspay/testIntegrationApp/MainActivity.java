@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         WebView.setWebContentsDebuggingEnabled(true);
 
-        preferences = getSharedPreferences(Payload.PayloadConstants.SHARED_PREF_KEY, MODE_PRIVATE);
+        preferences = getSharedPreferences(PayloadConstants.SHARED_PREF_KEY, MODE_PRIVATE);
         Payload.setDefaultsIfNotPresent(preferences);
         constructPrefetchPayload();
     }
@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void constructPrefetchPayload() {
-        String clientId = preferences.getString("clientIdPrefetch", Payload.PayloadConstants.clientId);
-        boolean useBetaAssets = preferences.getBoolean("betaAssetsPrefetch", Payload.PayloadConstants.betaAssets);
+        String clientId = preferences.getString("clientIdPrefetch", PayloadConstants.clientId);
+        boolean useBetaAssets = preferences.getBoolean("betaAssetsPrefetch", PayloadConstants.betaAssets);
         JSONArray services = new JSONArray();
         services.put("in.juspay.hyperpay");
 
@@ -85,15 +85,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void startInitiateActivity(View view){
-        Intent initiateIntent = new Intent(this, PaymentsActivity.class);
-        startActivity(initiateIntent);
+    public void startSelectionActivity(View view){
+        if (isPrefetchDone) {
+            Intent selectionIntent = new Intent(this, SelectionActivity.class);
+            startActivity(selectionIntent);
+        }
+        else
+            Snackbar.make(view, "Please prefetch first", Snackbar.LENGTH_SHORT).show();
     }
 
     public void startPrefetch(View view){
         HyperServices.preFetch(this, preFetchPayload);
         this.isPrefetchDone = true;
-        Toast.makeText(this, "Prefetch started!", Toast.LENGTH_SHORT).show();
+        Snackbar.make(view, "Prefetch started!", Snackbar.LENGTH_SHORT).show();
     }
 
     public void showPrefetchInput(View view){

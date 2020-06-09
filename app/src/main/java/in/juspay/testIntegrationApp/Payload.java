@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -37,7 +36,24 @@ public class Payload {
         return signaturePayload;
     }
 
-    public static JSONObject generateInitiatePayload(SharedPreferences preferences, JSONObject signaturePayload, String signature) {
+    public static JSONObject generateInitiatePayloadV1(SharedPreferences preferences, String clientAuthToken) {
+        JSONObject initiatePayload = new JSONObject();
+        try {
+            initiatePayload.put("action", PayloadConstants.initAction);
+            initiatePayload.put("clientId", preferences.getString("clientId", PayloadConstants.clientId));
+            initiatePayload.put("clientAuthToken", clientAuthToken);
+            initiatePayload.put("merchantId", preferences.getString("merchantId", PayloadConstants.merchantId));
+            initiatePayload.put("customerId", preferences.getString("customerId", PayloadConstants.customerId));
+            initiatePayload.put("emailAddress", preferences.getString("emailAddress", PayloadConstants.emailAddress));
+            initiatePayload.put("mobileNumber", preferences.getString("mobileNumber", PayloadConstants.mobileNumber));
+            initiatePayload.put("environment", preferences.getString("environment", PayloadConstants.environment));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return initiatePayload;
+    }
+
+    public static JSONObject generateInitiatePayloadV2(SharedPreferences preferences, JSONObject signaturePayload, String signature) {
         JSONObject initiatePayload = new JSONObject();
         try {
             initiatePayload.put("action", PayloadConstants.initAction);
@@ -65,6 +81,7 @@ public class Payload {
             orderDetails.put("merchant_id", preferences.getString("merchantId", PayloadConstants.merchantId));
             orderDetails.put("amount", preferences.getString("amount", PayloadConstants.amount));
             String mandateType = preferences.getString("mandateOption", PayloadConstants.mandateOption);
+
             if (!mandateType.equalsIgnoreCase("None")) {
                 orderDetails.put("options.create_mandate", mandateType);
                 orderDetails.put("mandate_max_amount", preferences.getString("mandateMaxAmount", PayloadConstants.mandateMaxAmount));
@@ -79,7 +96,7 @@ public class Payload {
                 orderDetails.put("metadata.PAYTM_V2:SUBSCRIPTION_START_DATE", formattedDate);
             }
             orderDetails.put("return_url", PayloadConstants.returnUrl);
-            String desc =  "Get pro for Rs. 0.33/mo for 3 months";
+            String desc =  "";
             orderDetails.put("description", desc);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -87,7 +104,35 @@ public class Payload {
         return orderDetails;
     }
 
-    public static JSONObject generateProcessPayload(SharedPreferences preferences, String orderId, JSONObject orderDetails, String signature) {
+    public static JSONObject generateProcessPayloadV1(SharedPreferences preferences, String orderId, String clientAuthToken) {
+        JSONObject processPayload = new JSONObject();
+        try {
+            processPayload.put("action", preferences.getString("action", PayloadConstants.processAction));
+            processPayload.put("merchantId", preferences.getString("merchantId", PayloadConstants.merchantId));
+            processPayload.put("clientId", preferences.getString("clientId", PayloadConstants.clientId));
+            processPayload.put("orderId", orderId);
+            processPayload.put("amount", preferences.getString("amount", PayloadConstants.amount));
+            processPayload.put("customerId", preferences.getString("customerId", PayloadConstants.customerId));
+            processPayload.put("customerEmail", preferences.getString("customerId", PayloadConstants.emailAddress));
+            processPayload.put("customerMobile", preferences.getString("mobileNumber", PayloadConstants.mobileNumber));
+
+            ArrayList<String> endUrlArr = new ArrayList<>(Arrays.asList(".*sandbox.juspay.in\\/thankyou.*", ".*sandbox.juspay.in\\/end.*", ".*localhost.*", ".*api.juspay.in\\/end.*"));
+            JSONArray endUrls = new JSONArray(endUrlArr);
+
+            processPayload.put("endUrls", endUrls);
+
+            processPayload.put("metadata.JUSPAY:gateway_reference_id", "vodafone");
+            processPayload.put("metadata.LAZYPAY:gateway_reference_id", "vodafone");
+
+            processPayload.put("clientAuthToken",clientAuthToken);
+            processPayload.put("language", preferences.getString("language", PayloadConstants.language));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return processPayload;
+    }
+
+    public static JSONObject generateProcessPayloadV2(SharedPreferences preferences, String orderId, JSONObject orderDetails, String signature) {
         JSONObject processPayload = new JSONObject();
         try {
             processPayload.put("action", preferences.getString("action", PayloadConstants.processAction));
@@ -149,7 +194,6 @@ public class Payload {
         if (!preferences.contains("betaAssetsPrefetch")) {
             editor.putBoolean("betaAssetsPrefetch", PayloadConstants.betaAssets);
         }
-
         if (!preferences.contains("firstName")) {
             editor.putString("firstName", PayloadConstants.firstName);
         }
@@ -171,14 +215,12 @@ public class Payload {
         if (!preferences.contains("language")) {
             editor.putString("language", PayloadConstants.language);
         }
-
         if (!preferences.contains("mandateOption")) {
             editor.putString("mandateOption", PayloadConstants.mandateOption);
         }
         if (!preferences.contains("mandateMaxAmount")) {
             editor.putString("mandateMaxAmount", PayloadConstants.mandateMaxAmount);
         }
-
         if (!preferences.contains("merchantId")) {
             editor.putString("merchantId", PayloadConstants.merchantId);
         }
@@ -194,6 +236,9 @@ public class Payload {
         if (!preferences.contains("signatureURL")) {
             editor.putString("signatureURL", PayloadConstants.signatureURL);
         }
+        if (!preferences.contains("apiKey")) {
+            editor.putString("apiKey", PayloadConstants.apiKey);
+        }
         if (!preferences.contains("environment")) {
             editor.putString("environment", PayloadConstants.environment);
         }
@@ -205,37 +250,5 @@ public class Payload {
         }
 
         editor.apply();
-    }
-
-    public abstract class PayloadConstants {
-
-        public static final String SHARED_PREF_KEY = "Configurations";
-
-        final public static String service = "in.juspay.hyperpay";
-
-        final public static String mobileNumber = "7338513562";
-        final public static String clientId = "hyper_beta_android";
-        final public static String firstName = "Test";
-        final public static String lastName = "User";
-        final public static String emailAddress = "test007@gmail.com";
-        final public static String customerId = "7338513562";
-        final public static String merchantId = "hyper_beta";
-
-        final public static String mandateOption = "NONE";
-        final public static String mandateMaxAmount = "1.0";
-
-        final public static String initAction = "initiate";
-        final public static String processAction = "paymentPage";
-        final public static String merchantKeyId = "2992";
-        final public static String environment = "sandbox";
-
-        final public static String amount = "1.0";
-        final public static String returnUrl = "https://sandbox.juspay.in/end";
-        final public static String language = "english";
-
-        final public static String signatureURL = "https://dry-cliffs-89916.herokuapp.com/sign-hyper-beta";
-
-        final public static boolean betaAssets = true;
-
     }
 }

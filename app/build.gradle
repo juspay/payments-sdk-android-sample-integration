@@ -41,5 +41,5 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
-    implementation 'in.juspay:hypersdk:2.0.0-rc.14'
+    implementation 'in.juspay:hypersdk:2.0.0-rc.47'
 }

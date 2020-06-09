@@ -57,6 +57,8 @@ public class SettingsActivity extends AppCompatActivity {
     EditText merchantKeyId;
     @BindView(R.id.signatureURL)
     EditText signatureURL;
+    @BindView(R.id.apiKey)
+    EditText apiKey;
     @BindView(R.id.actionSpinner)
     Spinner actionSpinner;
     @BindView(R.id.sandbox)
@@ -77,7 +79,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        preferences = getSharedPreferences(Payload.PayloadConstants.SHARED_PREF_KEY, MODE_PRIVATE);
+        preferences = getSharedPreferences(PayloadConstants.SHARED_PREF_KEY, MODE_PRIVATE);
         prepareUI();
     }
 
@@ -106,39 +108,40 @@ public class SettingsActivity extends AppCompatActivity {
         mandateAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mandateSpinner.setAdapter(mandateAdaptor);
 
-        firstName.setText(preferences.getString("firstName", Payload.PayloadConstants.firstName));
-        lastName.setText(preferences.getString("lastName", Payload.PayloadConstants.lastName));
-        mobileNumber.setText(preferences.getString("mobileNumber", Payload.PayloadConstants.mobileNumber));
-        emailAddress.setText(preferences.getString("emailAddress", Payload.PayloadConstants.emailAddress));
-        customerId.setText(preferences.getString("customerId", Payload.PayloadConstants.customerId));
-        amount.setText(preferences.getString("amount", Payload.PayloadConstants.amount));
-        languageSelected = languages.indexOf(preferences.getString("language", Payload.PayloadConstants.language));
+        firstName.setText(preferences.getString("firstName", PayloadConstants.firstName));
+        lastName.setText(preferences.getString("lastName", PayloadConstants.lastName));
+        mobileNumber.setText(preferences.getString("mobileNumber", PayloadConstants.mobileNumber));
+        emailAddress.setText(preferences.getString("emailAddress", PayloadConstants.emailAddress));
+        customerId.setText(preferences.getString("customerId", PayloadConstants.customerId));
+        amount.setText(preferences.getString("amount", PayloadConstants.amount));
+        languageSelected = languages.indexOf(preferences.getString("language", PayloadConstants.language));
         if (languageSelected != -1) {
             languageSpinner.setSelection(languageSelected);
         }
 
-        mandateSelected = mandateOptions.indexOf(preferences.getString("mandateOption", Payload.PayloadConstants.mandateOption));
+        mandateSelected = mandateOptions.indexOf(preferences.getString("mandateOption", PayloadConstants.mandateOption));
         if (mandateSelected != -1) {
             mandateSpinner.setSelection(mandateSelected);
         }
-        mandateMaxAmount.setText(preferences.getString("mandateMaxAmount", Payload.PayloadConstants.mandateMaxAmount));
+        mandateMaxAmount.setText(preferences.getString("mandateMaxAmount", PayloadConstants.mandateMaxAmount));
 
-        merchantId.setText(preferences.getString("merchantId", Payload.PayloadConstants.merchantId));
-        clientId.setText(preferences.getString("clientId", Payload.PayloadConstants.clientId));
-        service.setText(preferences.getString("service", Payload.PayloadConstants.service));
-        merchantKeyId.setText(preferences.getString("merchantKeyId", Payload.PayloadConstants.merchantKeyId));
-        signatureURL.setText(preferences.getString("signatureURL", Payload.PayloadConstants.signatureURL));
-        actionSelected = actions.indexOf(preferences.getString("action", Payload.PayloadConstants.processAction));
+        merchantId.setText(preferences.getString("merchantId", PayloadConstants.merchantId));
+        clientId.setText(preferences.getString("clientId", PayloadConstants.clientId));
+        service.setText(preferences.getString("service", PayloadConstants.service));
+        merchantKeyId.setText(preferences.getString("merchantKeyId", PayloadConstants.merchantKeyId));
+        signatureURL.setText(preferences.getString("signatureURL", PayloadConstants.signatureURL));
+        apiKey.setText(preferences.getString("apiKey", PayloadConstants.apiKey));
+        actionSelected = actions.indexOf(preferences.getString("action", PayloadConstants.processAction));
         if (actionSelected != -1) {
             actionSpinner.setSelection(actionSelected);
         }
-        env = preferences.getString("environment", Payload.PayloadConstants.environment);
+        env = preferences.getString("environment", PayloadConstants.environment);
         if (env.equals("sandbox")) {
             sandbox.setChecked(true);
         } else {
             prod.setChecked(true);
         }
-        betaAssets.setChecked(preferences.getBoolean("betaAssets", Payload.PayloadConstants.betaAssets));
+        betaAssets.setChecked(preferences.getBoolean("betaAssets", PayloadConstants.betaAssets));
 
         hasChanged = false;
     }
@@ -266,6 +269,14 @@ public class SettingsActivity extends AppCompatActivity {
         hasChanged = true;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("signatureURL", signatureURL.toString());
+        editor.apply();
+    }
+
+    @OnTextChanged(R.id.apiKey)
+    protected void apiKeyChanged(CharSequence apiKey) {
+        hasChanged = true;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("apiKey", apiKey.toString());
         editor.apply();
     }
 

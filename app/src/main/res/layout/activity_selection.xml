@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".SelectionActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,34 +42,17 @@
                     android:padding="16dp"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <Button
-                            android:onClick="showPrefetchInput"
-                            android:text="@string/input"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="12dp"/>
-
-                        <ImageView
-                            android:onClick="showPrefetchFAQ"
-                            android:layout_width="60dp"
-                            android:layout_height="match_parent"
-                            android:padding="2dp"
-                            android:tooltipText="@string/faq"
-                            android:contentDescription="@string/faq"
-                            android:src="@drawable/ic_faq" />
-
-
-                    </LinearLayout>
-
                     <Button
-                        android:onClick="startPrefetch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/prefetch"/>
+                        android:onClick="startV2Activity"
+                        android:text="@string/signature_based" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="startV1Activity"
+                        android:text="@string/client_auth_token_based" />
 
                 </LinearLayout>
 
@@ -99,9 +82,9 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:text="@string/prefetchDesc"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="@string/selectionDesc" />
 
                 </LinearLayout>
 
@@ -110,14 +93,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:onClick="startSelectionActivity"
-        android:text="@string/proceed" />
-
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

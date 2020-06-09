@@ -30,7 +30,7 @@ public class ConfigureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configure);
 
-        preferences = getSharedPreferences(Payload.PayloadConstants.SHARED_PREF_KEY, MODE_PRIVATE);
+        preferences = getSharedPreferences(PayloadConstants.SHARED_PREF_KEY, MODE_PRIVATE);
         prepareUI();
     }
 
@@ -43,8 +43,8 @@ public class ConfigureActivity extends AppCompatActivity {
             actionBar.setTitle(UiUtils.getWhiteText("Configuration"));
         }
 
-        clientId.setText(preferences.getString("clientIdPrefetch", Payload.PayloadConstants.clientId));
-        betaAssets.setChecked(preferences.getBoolean("betaAssetsPrefetch", Payload.PayloadConstants.betaAssets));
+        clientId.setText(preferences.getString("clientIdPrefetch", PayloadConstants.clientId));
+        betaAssets.setChecked(preferences.getBoolean("betaAssetsPrefetch", PayloadConstants.betaAssets));
 
         hasChanged = false;
     }

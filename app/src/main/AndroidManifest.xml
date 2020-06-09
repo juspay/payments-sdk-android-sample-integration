@@ -27,7 +27,15 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".PaymentsActivity"
+            android:name=".SelectionActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".PaymentsActivityV1"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".PaymentsActivityV2"
             android:theme="@style/AppTheme" />
 
         <activity

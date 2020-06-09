@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".PaymentsActivity">
+    tools:context=".PaymentsActivityV2">
 
     <LinearLayout
         android:id="@+id/initiateLayout"
@@ -217,9 +217,9 @@
                         android:padding="16dp">
 
                         <TextView
-                            android:text="@string/initiateDesc"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:text="@string/initiateDescV2" />
 
                     </LinearLayout>
 
@@ -501,9 +501,9 @@
                         android:padding="16dp">
 
                         <TextView
-                            android:text="@string/processDesc"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:text="@string/processDescV2" />
 
                     </LinearLayout>
 
