@@ -30,8 +30,8 @@
 
  ## Modifying SDK Credentials
 
- SDK credentials can be accessed as constants in ```app/src/main/java/in/juspay/TestIntegrationApp/PayloadConstants.java```
+ SDK credentials can be accessed as constants in ```app/src/main/java/in/juspay/testIntegrationApp/PayloadConstants.java```
 
- ## Learn more
+ <!-- ## Learn more
 
- [Juspay Integration Documentation](https://developer.juspay.in/)
+ [Juspay Integration Documentation](https://developer.juspay.in/) -->
