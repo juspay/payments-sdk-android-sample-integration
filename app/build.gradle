@@ -12,6 +12,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -42,4 +45,9 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
     implementation 'in.juspay:hypersdk:2.0.0-rc.47'
+    implementation ('in.juspay:ipc:2.0.1@aar') {
+        transitive = true
+    }
+
+    implementation 'in.juspay:godel:0.6.25.4.1423'
 }

@@ -23,7 +23,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
+import in.juspay.juspaysafe.BrowserCallback;
+import in.juspay.juspaysafe.BrowserParams;
+import in.juspay.juspaysafe.JuspaySafeBrowser;
 import in.juspay.services.HyperServices;
 
 public class MainActivity extends AppCompatActivity {
@@ -93,6 +98,39 @@ public class MainActivity extends AppCompatActivity {
         else
             Snackbar.make(view, "Please prefetch first", Snackbar.LENGTH_SHORT).show();
     }
+
+    public void startJuspaySafe(View view){
+        BrowserParams browserParams = new BrowserParams();
+        browserParams.setMerchantId("venkat");
+        browserParams.setClientId("venkat_android");
+        browserParams.setOrderId("123123");
+        browserParams.setTransactionId("23123123");
+        browserParams.setAmount("20");
+        browserParams.setCustomerId("123123123");
+        browserParams.setCustomerEmail("venkatesh.devendran@juspay.in");
+        browserParams.setCustomerPhoneNumber("7337232234");
+        browserParams.setUrl("http://www.google.com");
+
+        Map<String, String> customHeaders = new HashMap<>();
+        customHeaders.put("Accept-Encoding", "gzip, deflate, sdch");
+        customHeaders.put("Accept-Language", "en-US,en;q=0.8");
+        browserParams.setCustomHeaders(customHeaders);
+
+        JuspaySafeBrowser.setEndUrls(new String[] {"paytm.com"});
+        JuspaySafeBrowser.start(this, browserParams, browserCallback);
+
+    }
+    private BrowserCallback browserCallback = new BrowserCallback() {
+        @Override
+        public void endUrlReached(WebView webView, @Nullable JSONObject jsonObject) {
+
+        }
+
+        @Override
+        public void onTransactionAborted(@Nullable JSONObject jsonObject) {
+
+        }
+    };
 
     public void startPrefetch(View view){
         HyperServices.preFetch(this, preFetchPayload);

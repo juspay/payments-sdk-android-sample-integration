@@ -71,6 +71,12 @@
                         android:layout_height="wrap_content"
                         android:text="@string/prefetch"/>
 
+                    <Button
+                        android:onClick="startJuspaySafe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/juspay_safe"/>
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
